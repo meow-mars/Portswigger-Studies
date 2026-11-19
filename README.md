@@ -9,3 +9,4 @@
 | CSRF                       | Practitioner | 0 / 46   | Not started |
 
 ## Weekly log
+2026-11-19: Started server-side vulnerabilities
