@@ -1,7 +1,7 @@
 ### Lab: User role controlled by request parameter
 ---
 #### Objective: Delete the 'carlos' user using the admin panel identifying administrators using a forgeable cookie  
-**Technologies Required**
+**Technologies Used**
 Burpsuite Community Edition - Proxy setup (optional, but interesting to use)
 **Solving Steps**   
 [Method 1]
