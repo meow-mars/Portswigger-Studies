@@ -53,3 +53,10 @@ However, this does not provide a concrete resistance to attack, as the URL could
 	}
 </script>
 ```
+#### Parameter-based access control methods  
+This is when users' access rights or role is stored in a user-controllable location rather than being worked out server-side. This could be in a hidden field, cookie, or a preset query string parameter. On each request, the server reads the value and believes it. An attacker could modify these objects to potentially gain vertical privilege escalation. An example of this is in the URL parameter, where the role is stored and used in every request.
+```
+https://insecure-website.com/login/home.jsp?admin=true
+https://insecure-website.com/login/home.jsp?role=1
+```
+When elements are hidden from the users but still returned to the browser, a user can still view and change the elements by looking into the page source and response being sent back from the server. A practice to prevent this is to keep any important information such as user role on the server.
