@@ -20,4 +20,19 @@ Application constraints of who or what is authorised to perform actions/access r
 Access control design decisions are made by humans so errors are more likely to occur. An example this can lead to is **vertical privilege escalation**.  
 - This is when a non-admin user gains access to functionality that they were not supposed to have, giving them vertical privilege escalation.
 
-#### Unprotected Functionality
+#### Unprotected Functionality  
+Vertical privilege escalation happens when an application does not enforce any protection for 'sensitive functionality'. For example, administrative functions could be linked to a page that should only be accessible to admin users. If a normal user can access that page, they can execute privileged functions. An example URL with admin functionalities.
+
+```
+https://insecure-website.com/admin
+```
+
+#### Where to look
+In some cases, the administrative URL might be disclosed in other locations. An example of this is the "*robots.txt*" file which is usually placed in the website's root directory.
+```
+Extra Locations (Researched)
+/sitemap.xml
+Page source
+Commented out HTML -- less often but could be worth checking
+```
+
