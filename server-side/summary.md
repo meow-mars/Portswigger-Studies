@@ -35,4 +35,21 @@ Extra Locations (Researched)
 Page source
 Commented out HTML -- less often but could be worth checking
 ```
-
+#### Security By Obscurity  
+This is when sensitive functions are concealed, potentially with an unpredictable URL.
+```
+https://insecure-website.com/administrator-panel-yb556
+```
+However, this does not provide a concrete resistance to attack, as the URL could still be leaked within the application source to attackers and normal users. Take this given example, the URL is disclosed within the javascript, regardless of what role the user is.
+```javascript
+<script>
+	var isAdmin = false;
+	if (isAdmin) {
+		...
+		var adminPanelTag = document.createElement('a');
+		adminPanelTag.setAttribute('href', 'https://insecure-website.com/administrator-panel-yb556');
+		adminPanelTag.innerText = 'Admin panel';
+		...
+	}
+</script>
+```
