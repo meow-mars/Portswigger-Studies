@@ -31,3 +31,6 @@ The session cookie set after step 1 is already trusted, so simply navigating to 
 ---
 #### Bugs Identified  
 The 2FA step is not actually enforced, after logging in with the credentials, the server treats your session as logged in without checking whether the session completed the 2FA step. This means that the user can skip the extra authentication step and gain direct access to the acount.
+
+---
+**Date:** 2026-11-21 | **Status:** Solved
