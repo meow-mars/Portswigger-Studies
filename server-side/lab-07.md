@@ -1,7 +1,7 @@
 ### Lab: Username enumeration via different responses
 ---
 #### Objective: Enumerate a valid username, brute-force the user's password, then access their account page.
-**Technologies Used**
+**Tools Used**
 Burpsuite Community Edition - Burp Intruder
 **Solving Steps**   
 [Enumeration]
