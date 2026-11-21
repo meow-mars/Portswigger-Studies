@@ -5,6 +5,10 @@
 Logging into the given credentials, I can access the account portal, where I can see the URL parameter containing the id being set to the current user. Here I tried tampering with the parameter, modifying it to other potential admin accounts. I tried 'admin', but it did not work. Then I moved to 'administrator' and I was in the administrator account portal. From here I tried modifying the password and tried logging in, but it did not work, so I had to try another approach.  
 I used the DevTools to look at the HTML element concealing the admin password, where I was able to spot the value, within the HTML tag value parameter. From here I was able to retrieve the administrator account password and log in.  
 Logging into the administrator account, I can now access the admin panel and delete the user 'carlos'. Optionally, I can also change the email and password of the administrator account to mine, hijacking the account.
+```
+URL
+https://0a38004b0448228f806ed5e100ca0015.web-security-academy.net/my-account?id=administrator
+```
 
 ---
 #### Solution
