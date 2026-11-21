@@ -2,7 +2,9 @@
 ---
 #### Objective: Delete the 'carlos' user using the unprotected admin panel
 **Solving Steps**   
-On the website, I opened the developer console and accessed the Sources tab, looking through each sources for potential disclosure of unprotected pages. On the login page, I spotted an inline script which is hidden to normal users. The script creates a link to the admin panel, setting the href attribute as '/admin-68znvc'. From here I accessed the unprotected administration page to delete the 'carlos' user.
+On the website, I opened the developer console and accessed the Sources tab, looking through each sources for potential disclosure of unprotected pages. On the login page, I spotted an inline script which is hidden to normal users. The script creates a link to the admin panel, setting the href attribute as '/admin-68znvc'. From here I accessed the unprotected administration page to delete the 'carlos' user.  
+
+---
 #### Solution
 ```javascript
 /*
