@@ -59,4 +59,11 @@ This is when users' access rights or role is stored in a user-controllable locat
 https://insecure-website.com/login/home.jsp?admin=true
 https://insecure-website.com/login/home.jsp?role=1
 ```
-When elements are hidden from the users but still returned to the browser, a user can still view and change the elements by looking into the page source and response being sent back from the server. A practice to prevent this is to keep any important information such as user role on the server.
+When elements are hidden from the users but still returned to the browser, a user can still view and change the elements by looking into the page source and response being sent back from the server. A practice to prevent this is to keep any important information such as user role on the server.  
+#### Horizontal Privilege Escalation  
+This occurs when a user tries to gain resources belonging to another user, opposite to vertical privilege escalation. For example, an attacker wants to access another record belonging to another user is an example of horizontal privilege escalation. Similar to the parameter-based access control method, an attacker might modify the URL parameter to access an account that does not belong to them for instance.
+```
+https://insecure-website.com/myaccount?id=123
+https://insecure-website.com/myaccount?id=124 <-- modified parameter
+```
+In some applications, GUID might be used to prevent the attacker from guessing or predicting another user's identifier. This value however, could be disclosed elsewhere in the application, such as forum comments, user messages, or reviews.  
