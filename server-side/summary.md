@@ -89,3 +89,14 @@ firstname.lastname@company.com
 Even if there is no recognisable pattern, sometimes higher-privileged accounts could also be created with predictable usernames, such as 'admin' or 'administrator'.
 
 During audits, it is crucial to check if the website discloses such usernames publicly. In additional, it is also a good idea to check if the username or any sensitive details are visible in the HTTP requests.  
+
+#### Brute Forcing Passwords  
+Similar to usernames, passwords could also be brute-forced. Difficulties when brute-forcing varies depending on the complexity of the password. Modern websites adopt password policies, forcing users to create high entropy passwords that are theoretically harder to crack in brute-forces. Take Netflix for example, you are required to create a password with:
+- Minimum number of characters
+- At least 1 uppercase letter  
+- At least 1 special character  
+
+While such high-entropy passwords are difficult to crack, basic human behaviours can be used and exploit. For example, rather than creating a strong password with a random combination of characters, users often take a password that they can remember and try to crowbar it into fitting the password policy.  
+
+#### User Enumeration  
+User enumeration is when the attacker observes the website's behaviour to identify whether a given username is valid. This can vary from observing login page error or examining API query response time. When paired with brute force attacks, this can greatly increase the efficiency, helping the attacker generate a shortlist of valid usernames. 
