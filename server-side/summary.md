@@ -102,4 +102,32 @@ While such high-entropy passwords are difficult to crack, basic human behaviours
 User enumeration is when the attacker observes the website's behaviour to identify whether a given username is valid. This can vary from observing login page error or examining API query response time. When paired with brute force attacks, this can greatly increase the efficiency, helping the attacker generate a shortlist of valid usernames. 
 
 #### Bypassing Two-Factor Authentication  
-The implementation of two-factor authentication can be flawed at times and the user can be in the 'logged-in' state before inputting the verification code. It is worth testing if you can directly skip to this state after completing the first authentication state.
+The implementation of two-factor authentication can be flawed at times and the user can be in the 'logged-in' state before inputting the verification code. It is worth testing if you can directly skip to this state after completing the first authentication state.  
+
+**Where to look**
+- The page you land on *after* submitting username + password, but *before* the 2FA code (usually /login2 or similar).
+- Any post-login page like /my-account, /admin, or a known logged-in URL.
+
+---  
+### Server-Side Request Forgery (SSRF)  
+SSRF is a web security vulnerability that causes the server-side application to make requests to an unintended location. In these attacks, the attacker could make the server connect to internal services within the organisation infrastructure, or in some cases, to other external systems. This could leak to disclosure of credentials or sensitive information.  
+
+**SSRF against the server**  
+The attacker typically causes the application to make a HTTP request back to the server that is hosting the application - this could be through 127.0.0.1 or localhost. This is an example where the attacker modifies the POST request body to request the admin endpoint. A normal user can not access the endpoint. However if the request comes from the local machine, the normal access control is bypassed.  
+
+**Before**
+```
+POST /product/stock HTTP/1.0
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 118
+
+stockApi=http://stock.weliketoshop.net:8080/product/stock/check%3FproductId%3D6%26storeId%3D1  
+```
+**After**
+```
+POST /product/stock HTTP/1.0
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 118
+
+stockApi=http://localhost/admin
+```
