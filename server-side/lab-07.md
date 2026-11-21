@@ -142,3 +142,11 @@ Connection: keep-alive
 
 username=academico&password=peter
 ```
+--- 
+#### Bugs Identified
+- The errors given in the response were too specific, outlining whether the password or the username was wrong. 
+- This allowed attackers to infer from the attack and determine which account existed.
+- To fix this, make errors more general and use the same upon every error to avoid indirectly disclosing sensitive information.
+
+---
+**Date:** 2026-11-21 | **Status:** Solved
