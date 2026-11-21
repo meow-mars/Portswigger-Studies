@@ -69,3 +69,23 @@ https://insecure-website.com/myaccount?id=124 <-- modified parameter
 In some applications, GUID might be used to prevent the attacker from guessing or predicting another user's identifier. This value however, could be disclosed elsewhere in the application, such as forum comments, user messages, or reviews.  
 #### Horizontal to Vertical Escalation 
 Horizontal privilege escalation attacks could be turned into vertical privilege escalation attacks if a more privileged user is compromised. If an administrative account is compromised, the hijacker can perform privileged functions and alter credentials. This could also be done through parameter tampering.  
+
+---
+### Authentication  
+Authentication vulnerabilities can allow attackers to gain access to sensitive resources and functionalities, highlighting its significance in security. These vulnerabilities can also reveal additional attacking vectors for further exploitations.  
+
+*Important Distinction*
+Authentication is the process of verifying who the user claims to be, Authorisation is verifying whether the user is permitted to do something.  
+
+---
+### Brute Force Attacks  
+This is when the attacker uses a sequence of trials and errors in order to guess valid user credentials. Examples of this includes the dictionary attack, which uses a file of common passwords to attempt to gain access to an account. By combining with publicly available information and logic, the process of automated brute-forcing can make more educated guesses, increasing the efficiency of such attacks.  
+
+#### Brute Forcing Usernames  
+When usernames conform to a certain pattern, it can make it easier for attackers to guess. An example of such pattern can be business emails, which usually adopt the following pattern.
+```
+firstname.lastname@company.com
+```
+Even if there is no recognisable pattern, sometimes higher-privileged accounts could also be created with predictable usernames, such as 'admin' or 'administrator'.
+
+During audits, it is crucial to check if the website discloses such usernames publicly. In additional, it is also a good idea to check if the username or any sensitive details are visible in the HTTP requests.  
