@@ -100,3 +100,6 @@ While such high-entropy passwords are difficult to crack, basic human behaviours
 
 #### User Enumeration  
 User enumeration is when the attacker observes the website's behaviour to identify whether a given username is valid. This can vary from observing login page error or examining API query response time. When paired with brute force attacks, this can greatly increase the efficiency, helping the attacker generate a shortlist of valid usernames. 
+
+#### Bypassing Two-Factor Authentication  
+The implementation of two-factor authentication can be flawed at times and the user can be in the 'logged-in' state before inputting the verification code. It is worth testing if you can directly skip to this state after completing the first authentication state.
