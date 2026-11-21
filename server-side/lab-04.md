@@ -16,3 +16,6 @@ When logging into the account using the given credentials, use the DevTools to r
 
 --- 
 #### Both of these methods work because the server trusts whatever Admin value the browser sends
+
+---
+**Date:** 2026-11-21 | **Status:** Solved
