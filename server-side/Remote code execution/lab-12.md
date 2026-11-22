@@ -31,3 +31,8 @@ Content-Disposition: form-data; name="user"
 ```
 x1lYLG9ijtV9gKNvY2TC6oCeDEywD96c
 ```
+
+---
+**Bugs Found**  
+- The server only checked the Content-Type header of the file upload without validating the actual file content
+- The attacker could swap out the malicious payload filetype header to another allowed MIME type
