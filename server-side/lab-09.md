@@ -44,3 +44,6 @@ Looking into why when I tried to delete the target user character earlier and fa
 This however, was different to why the stockApi paramaeter works. In the field, the server reads the URL and fetches a new request for you. This is a brand new connection, starting from the server itself. In other words, the connection really came from localhost and I tricked the server into being my messenger.  
 
 ---  
+**Bugs Identified**  
+- The stock-check feature takes in any URL without any validation, fetching any addresses, including internal ones
+- The admin panel grants access based on where the request came from (localhost). Via SSRF, the request genuinely originates from localhost because the server sends it on my behalf, so the panel lets it through — and it enforces no additional authentication to prove the user is an admin.
