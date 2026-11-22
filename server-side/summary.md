@@ -131,3 +131,7 @@ Content-Length: 118
 
 stockApi=http://localhost/admin
 ```
+**Trust Relationship**
+Why do applications behave this way can root from various reasons:
+- The access control check lives on a different component in front of the application server, when the request is made back, this component is bypassed.
+- Data recovery: when an unprecedented event occurs, any user coming from the local machine can recover the system without logging on, in case they lose their credentials
