@@ -135,3 +135,13 @@ stockApi=http://localhost/admin
 Why do applications behave this way can root from various reasons:
 - The access control check lives on a different component in front of the application server, when the request is made back, this component is bypassed.
 - Data recovery: when an unprecedented event occurs, any user coming from the local machine can recover the system without logging on, in case they lose their credentials
+
+**Where to look**
+- Any input that is, or contains, a URL: stockApi=, url=, uri=, path=, dest=, redirect=, feed=, callback=, image=, webhook settings.
+- Features that fetch things: "check stock", "import from URL", "preview link", PDF/screenshot generators, webhooks, file upload by URL.
+- Hidden spots: a full URL inside a POST body, or inside XML/JSON. Sometimes only the hostname is used, so try replacing it.
+
+**If filters block it, try**
+- Alternative IP formats: 127.0.0.1 -> 127.1 , 0.0.0.0 , or decimal/hex encodings
+- Different host that resolves to localhost
+- Redirects: point to a URL you control that 302-redirects to the internal target
