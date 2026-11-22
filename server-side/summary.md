@@ -144,4 +144,17 @@ Why do applications behave this way can root from various reasons:
 **If filters block it, try**
 - Alternative IP formats: 127.0.0.1 -> 127.1 , 0.0.0.0 , or decimal/hex encodings
 - Different host that resolves to localhost
-- Redirects: point to a URL you control that 302-redirects to the internal target
+- Redirects: point to a URL you control that 302-redirects to the internal target 
+
+#### SSRF Against other Back-End Systems  
+In other cases, the application is able to reach internal back-end systems that are not directly accessible to normal users - protected by network topology. In some cases, internal back-end systems may contain sensitive functionalities that can be accessed by anyone that interacts with the system, without authentication.  
+
+Suppose there is an administrative interface at the back-end URL: '**http://192.168.0.68/admin**', the following request can be submitted to access the interface:  
+```
+POST /product/stock HTTP/1.0
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 118
+
+stockApi=http://192.168.0.68/admin
+```
+
