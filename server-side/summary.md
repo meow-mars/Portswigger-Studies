@@ -157,4 +157,6 @@ Content-Length: 118
 
 stockApi=http://192.168.0.68/admin
 ```
-
+**Recon Tips**
+- Use Burp Intruder - Numbers to brute force a range of internal IP addresses
+- Look at which response has a differing length or status code
