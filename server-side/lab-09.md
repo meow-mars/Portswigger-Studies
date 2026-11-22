@@ -47,3 +47,6 @@ This however, was different to why the stockApi paramaeter works. In the field, 
 **Bugs Identified**  
 - The stock-check feature takes in any URL without any validation, fetching any addresses, including internal ones
 - The admin panel grants access based on where the request came from (localhost). Via SSRF, the request genuinely originates from localhost because the server sends it on my behalf, so the panel lets it through — and it enforces no additional authentication to prove the user is an admin.
+
+---
+**Date:** 2026-11-22 | **Status:** Solved

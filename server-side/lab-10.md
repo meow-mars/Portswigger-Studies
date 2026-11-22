@@ -114,3 +114,6 @@ stockApi=http://192.168.0.96:8080/admin/delete?username=carlos
 **Bug Found**  
 - The stock-check feature takes a user-supplied URL and fetches without any validation. The server should validate against an allow-list and block internal IP ranges.
 - The internal admin interface does not provide any authentication, so calling /**admin/delete?username=carlos** just works without any login required.
+
+---
+**Date:** 2026-11-22 | **Status:** Solved
