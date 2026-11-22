@@ -160,3 +160,23 @@ stockApi=http://192.168.0.68/admin
 **Recon Tips**
 - Use Burp Intruder - Numbers to brute force a range of internal IP addresses
 - Look at which response has a differing length or status code
+
+---  
+### File Upload Vulnerabilities  
+File upload vulnerabilities happen when a web server allows users to upload files to its filesystem without validating attributes, such as name, file type, contents, or size. Failing to enforce restrictions or validate these files can allow attackers to upload arbitrary and malicious files.  
+
+#### How do these vulnerabilities occur?  
+In development, developers may try to implement what they think is robust validation that is inherently flawed or can be easily bypassed. When using a blacklist, they may fail to account for parsing discrepancies when checking file extensions. They may also omit obscure files which may stay be dangerous. 
+
+The websites may try to check the file type property, which can be modified by attackers through Burpsuite Proxy.  
+
+#### Deploying a web shell through unrestricted file upload  
+From a security perspective, the worst possible scenario is when a website allows you to upload server-side scripts, such as PHP, Java, or Python files, and is also configured to execute them as code. If you're able to successfully upload a web shell, you effectively have full control over the server. Look at payloads/web-shell for more examples of payloads. Some examples of these payloads are: 
+```php
+Allows you to view the content of a file on the filesystem
+<?php echo file_get_contents('/path/to/target/file'); ?>
+
+Used together to execute arbitrary commands on the target system
+<?php echo system($_GET['command']); ?>
+GET /example/exploit.php?command=whoami HTTP/1.1
+```
