@@ -214,4 +214,6 @@ POST /images HTTP/1.1
 
 From this, we can see that different fields of the form are separated into parts. Each part contains their own **Content-Disposition** header, providing basic information and the field it belongs to. They may also contain a **Content-Type** header, which tells the server the MIME type of data that was submitted using this input.  
 
-A website may attempt to validate file uploads by checking that the **Content-Type** header matches an expected MIME type. If this check is implicitly trusted by the server, an attacker can modify the field to bypass this validation and upload arbitrary files to the server.
+A website may attempt to validate file uploads by checking that the **Content-Type** header matches an expected MIME type. If this check is implicitly trusted by the server, an attacker can modify the field to bypass this validation and upload arbitrary files to the server.  
+
+---
